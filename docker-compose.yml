@@ -1,0 +1,20 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  spring:
+    container_name: spring-boot-demo
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src/
+    depends_on:
+      - postgres
+    restart: always
+  postgres:
+    container_name: postgres-db
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: student
